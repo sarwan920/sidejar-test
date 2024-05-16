@@ -139,10 +139,14 @@ import IconInbox from "@/components/icons/IconInbox.vue";
   font-size: 14px;
   width: 244px;
   text-align: left;
+  margin-block-start: 0px;
+  margin-block-end: 0px;
 }
 
 .category {
   font-size: 12px;
   color: #1e1f24;
+  margin-block-start: 10px;
+  margin-block-end: 0px;
 }
 </style>
