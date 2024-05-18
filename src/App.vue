@@ -1,10 +1,24 @@
 <script setup>
+import { ref } from 'vue'
+import DomainModal from '@/components/Modal/DomainModal.vue'
 import IconBrokenChain from "@/components/icons/IconBrokenChain.vue";
 import IconInbox from "@/components/icons/IconInbox.vue";
+
+const showModal = ref(false);
+
+
+function closeModal(status) {
+  showModal.value = status;
+
+}
 </script>
 
 <template>
   <div class="card-container">
+    <Teleport to="body">
+      <DomainModal v-if="showModal" @close-modal="closeModal" />
+      <button class="modal-button" @click="showModal = !showModal">Show Modal</button>
+    </Teleport>
     <div class="card" v-for="card in 4" :key="card">
       <div class="inbox__icon">
         <div class="icon-container">
@@ -37,9 +51,22 @@ import IconInbox from "@/components/icons/IconInbox.vue";
 </template>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
 .card-container {
   display: flex;
   gap: 20px;
+
+}
+
+.modal-button {
+  border-radius: 8px;
+  border: 1px solid rgba(0, 7, 53, 0.15);
+  padding: 8px;
+  background-color: white;
+  cursor: pointer;
+  margin-top: 20px;
+
 }
 
 .card {
@@ -50,6 +77,14 @@ import IconInbox from "@/components/icons/IconInbox.vue";
   padding: 10px;
   position: relative;
 }
+
+.card:hover {
+  border-radius: 20px;
+  background: #FFF;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.10), 0px 4px 6px 0px rgba(0, 0, 0, 0.05);
+  padding: 10px;
+}
+
 
 .inbox__icon {
   position: absolute;
@@ -79,11 +114,6 @@ import IconInbox from "@/components/icons/IconInbox.vue";
   align-items: center;
 }
 
-.card:hover {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  transition: all cubic-bezier(0.23, 1, 0.32, 1);
-  padding: 10px;
-}
 
 .coming-soon {
   text-align: center;
@@ -93,9 +123,13 @@ import IconInbox from "@/components/icons/IconInbox.vue";
 }
 
 .coming-soon__heading {
-  font-size: medium;
-  font-weight: 900;
-  color: #1e1f24;
+  color: #1E1F24;
+  text-align: center;
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px;
   margin-block-start: 20px;
   margin-block-end: 10px;
 }
@@ -114,6 +148,10 @@ import IconInbox from "@/components/icons/IconInbox.vue";
 
 .card-headings__heading {
   color: #1e1f24;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
 }
 
 .card-content {
